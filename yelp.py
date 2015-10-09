@@ -1,12 +1,14 @@
 import json
 import rauth
+import time
 
-def get_search_parameters(name, location):
+def get_search_parameters(location,offset):
 	params = {}
-	params["term"] = "{}".format(name)
+	params["term"] = "restaurant"
+	params["offset"] = "{}".format(str(offset))
 	params["location"] = "{}".format(location)
 	params["radius_filter"] = "2000"
-	params["limit"] = "1"
+	params["limit"] = "20"
 	return params
 
 def get_results(params):
@@ -27,11 +29,21 @@ def get_results(params):
 
 	return data
 
-def search_yelp(name,location):
-	queries = [(name,location)]
+def search_yelp(location):
+	locations=["irvine"]
 	api_calls = []
-	for name,location in queries:
-		params = get_search_parameters(name,location)
-		api_calls.append(get_results(params))
+	results = []
+	names = []
+	urls = []
+	for location in locations:
+		for i in range(0,2):
+			params = get_search_parameters(location,20*i)
+			api_calls.append(get_results(params))
+			time.sleep(1.0)
 	for item in api_calls:
-		return item['businesses'][0]['url']
+		results.append(item)
+	for item in results:
+		for i in item['businesses']:
+			names.append(i['name'])
+			urls.append(i['url'])
+	return (names,urls)
