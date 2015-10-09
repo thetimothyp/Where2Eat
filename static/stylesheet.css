@@ -1,0 +1,14 @@
+.container {
+    max-width: 600px;
+    padding-top: 100px;
+}
+
+h1 {
+    text-align:center;
+    font-family:Helvetica;
+    font-size:5em;
+}
+
+#yelp {
+	text-align:center;
+}
