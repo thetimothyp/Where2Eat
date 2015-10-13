@@ -1,0 +1,32 @@
+.container {
+    max-width: 600px;
+    padding-top: 100px;
+}
+
+h1 {
+    text-align:center;
+    font-family:Helvetica;
+    font-size:5em;
+}
+
+#yelp {
+	text-align:center;
+}
+
+
+.input-wrapper {
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+    margin-top: 15%;
+}
+
+label {
+    font-size: 2.5em;
+    text-align: center;
+}
+
+input {
+    font-size: 2em;
+    width: 250px;
+}
