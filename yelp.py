@@ -29,8 +29,8 @@ def get_results(params):
 
 	return data
 
-def search_yelp(location):
-	locations=["irvine"]
+def search_yelp(loc):
+	locations=[loc]
 	api_calls = []
 	results = []
 	names = []

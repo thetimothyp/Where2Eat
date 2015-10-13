@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import random
 from yelp import *
 
@@ -18,18 +18,24 @@ from yelp import *
 
 app = Flask(__name__)
 
+# Results view that displays the randomly selected restaurant and the yelp link.
+# If refreshed, will produce a new restaurant in the same location that was given in
+# the previous view.
+@app.route("/result", methods = ['POST', 'GET'])
 
-@app.route("/")
+def get_location():
+        results=search_yelp(request.form['location'])
+        restaurants=results[0]
+        urls=results[1]
+        i=random.randint(0,len(restaurants)-1)
+        return render_template('restaurant.html', search_result = urls[i], my_list = restaurants, rand_int = i)
 
+# Inital view that displays a simple page asking for a location
+# Once button is clicked, user is redirected to the result view
+@app.route("/", methods = ['POST', 'GET'])
 
 def template_test():
-	yelp = False
-	results=search_yelp("irvine")
-	restaurants=results[0]
-	urls=results[1]
-	i=random.randint(0,len(restaurants)-1)
-	# result=search_yelp(restaurants[i],"irvine")
-	return render_template('template.html', search_result=urls[i], rand_int=i, my_list=restaurants)
+	return render_template('template.html')
 
 if __name__ == '__main__':
 	app.run(debug=True)
