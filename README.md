@@ -1,4 +1,4 @@
-# where2ate
+# Where2Eat
 Decide where to eat randomly!
 
 
